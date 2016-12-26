@@ -11,7 +11,7 @@ Bfs::~Bfs() {
 
 deque<Node*>* Bfs::bfs(Node* current, Node* target) {
     deque<Node*>* nodes = new deque<Node*>();
-    // until we find the target
+    // until we find the target.
     while (!(*current == *target)) {
         if (current->hasNext()) {
             Node* next = current->next();
