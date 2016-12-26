@@ -23,8 +23,9 @@ class Trip {
          * @param end the ending point of the trip.
          * @param numPassengers number of passengers for the trip.
          * @param tariff the trips tariff.
+         * @param stratTime the starting time of the trip.
          */
-        Trip(int rideId, Node* start, Node* end, int numPassengers, double tariff);
+        Trip(int rideId, Node* start, Node* end, int numPassengers, double tariff, int stratTime);
         /**
          * destructas the trip..
          */

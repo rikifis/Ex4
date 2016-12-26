@@ -100,19 +100,19 @@ void TaxiFlow::addDriver() {
 }
 */
 void TaxiFlow::addTrip() {
-    int id, xStart, yStart, xEnd, yEnd, numPassengers;
+    int id, xStart, yStart, xEnd, yEnd, numPassengers, startTime;
     double tariff;
     // skips the punctuation marks.
     char skip;
     // gets the trip's details from the user.
     cin >> id >> skip >> xStart >> skip >> yStart >> skip >> xEnd
-        >> skip >> yEnd >> skip >> numPassengers >> skip >> tariff;
+        >> skip >> yEnd >> skip >> numPassengers >> skip >> tariff >> skip >> startTime;
     // gets the starting point from the map.
     GridPt* start = center.getMap()->getPoint(Point(xStart,yStart));
     // gets the ending point from the map.
     GridPt* end = center.getMap()->getPoint(Point(xEnd,yEnd));
     // creates the new trip.
-    Trip* trip = new Trip(id, start, end, numPassengers, tariff);
+    Trip* trip = new Trip(id, start, end, numPassengers, tariff, startTime);
     // adds the trip to the center.
     center.addTrip(trip);
 }

@@ -58,7 +58,7 @@ void TaxiCenter::sendTaxi() {
                     currDriver->drive();
                     // delete the trip we drove already.
                     delete trips.at(tripIndex);
-                    trips.erase(trips.at(tripIndex));
+                    trips.erase(trips.begin() + tripIndex);
                     driverCounter++;
                     break;
                 }
@@ -72,7 +72,7 @@ void TaxiCenter::sendTaxi() {
     }
 }
 void TaxiCenter::continueDriving() {
-    for (i = 0; i < drivers.size(); i++) {
+    for (int i = 0; i < drivers.size(); i++) {
         if (drivers.at(i)->isDriving()) {
             drivers.at(i)->drive();
         }

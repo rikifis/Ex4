@@ -5,8 +5,9 @@
 
 #ifndef UDP_H_
 #define UDP_H_
-
+#include <iostream>
 #include "Socket.h"
+using namespace std;
 
 
 class Udp: public Socket {
@@ -49,6 +50,8 @@ public:
 	* the data															   *
 	***********************************************************************/
 	int reciveData(char* buffer, int size);
+
+    void closeUdp();
 };
 
 #endif /* UDP_H_ */

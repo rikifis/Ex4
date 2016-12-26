@@ -29,6 +29,11 @@ class Luxury : public Taxi {
          * sets the cabs tariff.
          * @param t the new tariff.
          */
-       // void setTariff(double t);
+        void setTariff(double t);
+        /**
+         * returns the type number of the cab.
+         * @return the type
+         */
+        int getType();
 };
 #endif //EX3_LUXURY_H

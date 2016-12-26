@@ -5,6 +5,7 @@
 ************************************************************/
 
 
+#include <unistd.h>
 #include "Udp.h"
 
 /***********************************************************************
@@ -25,7 +26,6 @@ Udp::Udp(bool isServers, int port_num) {
 * The Function operation: default destructor					       *
 ***********************************************************************/
 Udp::~Udp() {
-	// TODO Auto-generated destructor stub
 }
 
 /***********************************************************************
@@ -49,9 +49,9 @@ int Udp::initialize() {
 		sin.sin_addr.s_addr = INADDR_ANY;
 		sin.sin_port = htons(this->port_number);
 		//bind
-		if (bind(this->socketDescriptor,
-				(struct sockaddr *) &sin, sizeof(sin)) < 0) {
-			return ERROR_BIND;
+		if (bind(this->socketDescriptor, (struct sockaddr*) &sin, sizeof(sin)) < 0) {
+			cout << "hi" << endl;
+            return ERROR_BIND;
 		}
 	}
 	//return correct if there were no problems
@@ -76,9 +76,8 @@ int Udp::sendData(string data) {
 	const char * datas = data.c_str();
 	int data_len = data.length() + 1;
 	//send
-	int sent_bytes = sendto(this->socketDescriptor,
-			datas, data_len, 0, (struct sockaddr *) &sin, sizeof(sin));
-//	cout << sent_bytes << endl;
+	int sent_bytes = sendto(this->socketDescriptor, datas, data_len,
+                            0, (struct sockaddr*) &sin, sizeof(sin));
 	//check if send successfully
 	if (sent_bytes < 0) {
 		return ERROR_SEND;
@@ -97,18 +96,18 @@ int Udp::reciveData(char* buffer, int size) {
 	struct sockaddr_in to;
 	unsigned int to_len = sizeof(struct sockaddr_in);
 	//receive
-	int bytes = recvfrom(this->socketDescriptor,
-			buffer, size, 0, (struct sockaddr *) &to, &to_len);
+	int bytes = recvfrom(this->socketDescriptor, buffer, size,
+                         0, (struct sockaddr *) &to, &to_len);
 	//set the port number to the new one which we get with the data
 	this->port_number = ntohs(to.sin_port);
 	//check if receive successfully
-
-//    cout << bytes << endl;
 	if (bytes < 0) {
 		return -1;
 	}
-	//print the data
-//	cout<<buffer<<endl;
 	//return correct if there were no error
 	return bytes;
+}
+
+void Udp::closeUdp() {
+    close(this->socketDescriptor);
 }
