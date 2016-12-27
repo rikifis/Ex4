@@ -5,7 +5,11 @@
       <sourceFolder url="file://$MODULE_DIR$/GridPt.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Node.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/client.cpp" isTestSource="false" />
+<<<<<<< Updated upstream
       <sourceFolder url="file://$MODULE_DIR$/Grid.h" isTestSource="false" />
+=======
+      <sourceFolder url="file://$MODULE_DIR$/Trip.h" isTestSource="false" />
+>>>>>>> Stashed changes
       <sourceFolder url="file://$MODULE_DIR$/Point.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TaxiFlow.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Node.cpp" isTestSource="false" />
@@ -14,6 +18,10 @@
       <sourceFolder url="file://$MODULE_DIR$/server.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Udp.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Grid.cpp" isTestSource="false" />
+<<<<<<< Updated upstream
+=======
+      <sourceFolder url="file://$MODULE_DIR$/Map.h" isTestSource="false" />
+>>>>>>> Stashed changes
       <sourceFolder url="file://$MODULE_DIR$/TaxiCenter.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Passenger.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Driver.cpp" isTestSource="false" />
@@ -25,6 +33,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Point.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Passenger.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Trip.cpp" isTestSource="false" />
+<<<<<<< Updated upstream
       <sourceFolder url="file://$MODULE_DIR$/Map.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Luxury.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Driver.h" isTestSource="false" />
@@ -35,6 +44,17 @@
       <sourceFolder url="file://$MODULE_DIR$/TaxiCenter.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Socket.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Udp.cpp" isTestSource="false" />
+=======
+      <sourceFolder url="file://$MODULE_DIR$/TaxiCenter.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Luxury.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Driver.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GridPt.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Bfs.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Socket.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Udp.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Grid.h" isTestSource="false" />
+>>>>>>> Stashed changes
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
