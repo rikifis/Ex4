@@ -13,9 +13,9 @@ find_package(Boost 1.58.0 COMPONENTS serialization system) # or equivalent versi
 #add_library(Ex4 core ${core_SRCS})
 
 #add_executable(server TaxiCenter.cpp)
-add_executable(client Driver.cpp)
+add_executable(client client.cpp)
 
 
-#target_link_libraries(Ex4 core ${Boost_LIBRARIES})
+target_link_libraries(Ex4 ${Boost_LIBRARIES})
 include_directories(${Boost_INCLUDE_DIR})
 

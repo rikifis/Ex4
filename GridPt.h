@@ -4,7 +4,20 @@
 #include <vector>
 #include "Node.h"
 #include "Point.h"
+#include <boost/serialization/vector.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/tokenizer.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/assign/list_of.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/iostreams/device/back_inserter.hpp>
+#include <boost/iostreams/stream.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
 using namespace std;
+using namespace boost::archive;
 /*
  * a class of a grid points. creates a point with special
  * methods only a point on a grid can do. this class inherits from Node.
@@ -17,6 +30,20 @@ private:
     vector<GridPt*> neighbors;
     int nCounter;
     bool obstacle;
+
+    friend class boost::serialization::access;
+
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version) {
+       ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Node);
+      //  ar & boost::serialization::base_object<Node>(*this);
+        ar & pt;
+        ar & passed;
+        ar & predecessor;
+        ar & neighbors;
+        ar & nCounter;
+        ar & obstacle;
+    }
 public:
     /**
      * builds a GridPt from a given point.

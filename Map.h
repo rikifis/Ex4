@@ -4,8 +4,20 @@
 #include "Point.h"
 #include "Grid.h"
 #include "GridPt.h"
-
+#include <boost/serialization/vector.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/tokenizer.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/assign/list_of.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/iostreams/device/back_inserter.hpp>
+#include <boost/iostreams/stream.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
 using namespace std;
+using namespace boost::archive;
 /**
  * this class creates a map of the city for the drivers.
  */
@@ -15,6 +27,16 @@ private:
     GridPt points[10][10];
     Point size;
     vector<Node*>* obstacles;
+
+
+    friend class boost::serialization::access;
+
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version) {
+        ar & points;
+        ar & size;
+        ar & obstacles;
+    }
 protected:
     /**
     * fills the grid with points.

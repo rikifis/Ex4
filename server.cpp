@@ -2,7 +2,7 @@
 #include "Udp.h"
 #include <unistd.h>
 using namespace std;
-int main() {
+int smain() {
     cout << "Hello, from server" << endl;
 
     Socket* udp = new Udp(1, 1111);
@@ -12,7 +12,7 @@ int main() {
     udp->reciveData(buffer, sizeof(buffer));
     cout << buffer << endl;
     udp->sendData("sup?");
-    ((Udp*)udp)->closeUdp();
+    udp->closeSocket();
     delete udp;
 //
 //    usleep(5000);

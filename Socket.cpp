@@ -19,11 +19,11 @@
 * ip, and no port number and socket descriptor, 0 backlogs.			   *
 ***********************************************************************/
 Socket::Socket() {
-	this->ip_address = IP;
-	this->backLog = NONE;
-	this->socketDescriptor = NONE;
-	this->isServer = true;
-	this->port_number = NONE;
+	ip_address = IP;
+	backLog = NONE;
+	socketDescriptor = NONE;
+	isServer = true;
+	port_number = NONE;
 }
 
 /***********************************************************************
@@ -33,7 +33,7 @@ Socket::Socket() {
 * The Function operation: default destructor					       *
 ***********************************************************************/
 Socket::~Socket() {
-	close(this->socketDescriptor);
+	close(socketDescriptor);
 }
 
 

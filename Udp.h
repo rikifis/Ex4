@@ -51,7 +51,8 @@ public:
 	***********************************************************************/
 	int reciveData(char* buffer, int size);
 
-    void closeUdp();
+    void closeSocket();
+    void setIp(string ip);
 };
 
 #endif /* UDP_H_ */

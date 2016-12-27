@@ -2,6 +2,21 @@
 #define EX3_NODE_H
 #include <iostream>
 #include "Point.h"
+#include <boost/serialization/vector.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/tokenizer.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/assign/list_of.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/iostreams/device/back_inserter.hpp>
+#include <boost/iostreams/stream.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+using namespace std;
+using namespace boost::archive;
+
 /**
  * this class creates an abstract class of a node.
  * each class that will inherit from Node will implement the following funcs.
@@ -10,6 +25,13 @@ class Node {
 private:
     bool passed;
     Node* predecessor;
+protected:
+    friend class boost::serialization::access;
+
+    template<class Archive>
+    void serialize(Archive &ar, const unsigned int version) {
+
+    }
 public:
     /**
      * constructs a Node.
