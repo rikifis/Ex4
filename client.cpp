@@ -4,6 +4,7 @@
 
 #include "Udp.h"
 #include "Driver.h"
+#include <boost/iostreams/device/array.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/tokenizer.hpp>
@@ -63,12 +64,21 @@ int main(int argc, char *argv[]) {
     boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
     boost::archive::binary_oarchive oa(s);
     oa << driver;
+    // flush the stream to finish writing into the buffer
     s.flush();
 
     cout << serial_str << endl;
+    char* buf = new char[serial_str.size()];
 
+/**
+ * // wrap buffer inside a stream and deserialize serial_str into obj
+boost::iostreams::basic_array_source<char> device(serial_str.data(), serial_str.size());
+boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s(device);
+boost::archive::binary_iarchive ia(s);
+ia >> obj;
+ */
     Driver* driver2;
-    boost::iostreams::basic_array_source<char> device((char*)serial_str.c_str(), (char*)serial_str.size());
+    boost::iostreams::basic_array_source<char> device((char*)serial_str.data(), (char*)serial_str.size());
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
     boost::archive::binary_iarchive ia(s2);
     ia >> driver2;
