@@ -6,6 +6,7 @@ int main(int argc, char *argv[]) {
     }
     Socket* socket = new Udp(0, atoi(argv[1]));
     TaxiFlow flow = TaxiFlow(socket);
+    cout << "hello from server" << endl;
     // gets the input from the user and runs the taxi center.
     flow.getInput();
     return 0;
@@ -85,6 +86,7 @@ void TaxiFlow::addDrivers() {
     cin >> numDrivers;
     char buffer[1000];
     for (int i = 0; i < numDrivers; i++) {
+        cout << "waiting for driver" << endl;
         // get the driver.
         socket->receiveData(buffer, sizeof(buffer));
         Driver* driver;
@@ -92,7 +94,7 @@ void TaxiFlow::addDrivers() {
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s(device);
         boost::archive::binary_iarchive ia(s);
         ia >> driver;
-
+        cout << "driver " << driver->getId() << "," << driver->getAge() << "," << driver->getStatus() << endl;
         //sends the map to the driver.
         std::string serial_str;
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
