@@ -47,7 +47,7 @@ class TaxiFlow {
         /**
          * constructs a TaxiFlow.
          */
-        TaxiFlow(Socket* socket1);
+        TaxiFlow(Socket* socket);
         /**
          * destructs a TaxiFlow.
          */

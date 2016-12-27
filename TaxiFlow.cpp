@@ -86,7 +86,7 @@ void TaxiFlow::addDrivers() {
     char buffer[1000];
     for (int i = 0; i < numDrivers; i++) {
         // get the driver.
-        socket->recieveData(buffer, sizeof(buffer));
+        socket->receiveData(buffer, sizeof(buffer));
         Driver* driver;
         boost::iostreams::basic_array_source<char> device(buffer, sizeof(buffer));
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s(device);

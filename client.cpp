@@ -76,7 +76,7 @@ int omain(int argc, char *argv[]) {
 
 
     // get the map of the city.
-    udp->recieveData(buffer, sizeof(buffer));
+    udp->receiveData(buffer, sizeof(buffer));
 
     Map* map;
     boost::iostreams::basic_array_source<char> device1(buffer, sizeof(buffer));
@@ -87,7 +87,7 @@ int omain(int argc, char *argv[]) {
     driver->setMap(map);
 
     // get the taxi of the driver.
-    udp->recieveData(buffer, sizeof(buffer));
+    udp->receiveData(buffer, sizeof(buffer));
 
     Taxi* taxi;
     boost::iostreams::basic_array_source<char> device2(buffer, sizeof(buffer));
@@ -108,10 +108,6 @@ int omain(int argc, char *argv[]) {
     ia >> taxi;
 
     driver->setCab(taxi);*/
-
-
-
-
 
     udp->closeSocket();
     delete udp;
