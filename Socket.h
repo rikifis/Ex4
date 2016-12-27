@@ -79,7 +79,7 @@ class Socket {
 		* The Function operation: getting data from the other socket and print *
 		* the data															   *
 		***********************************************************************/
-		virtual int reciveData(char* buffer, int size) = 0;
+		virtual int recieveData(char* buffer, int size) = 0;
 
 		virtual void closeSocket() = 0;
 		virtual void setIp(string ip) = 0;

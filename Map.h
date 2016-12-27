@@ -33,9 +33,10 @@ private:
 
     template<class Archive>
     void serialize(Archive &ar, const unsigned int version) {
-        ar & points;
+        ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Grid);
+        //ar & points;
         ar & size;
-        ar & obstacles;
+        //ar & obstacles;
     }
 protected:
     /**

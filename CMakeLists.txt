@@ -3,7 +3,7 @@ project(Ex4)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES server.cpp client.cpp Socket.cpp Socket.h Udp.cpp Udp.h Grid.cpp Grid.h GridPt.cpp GridPt.h Point.cpp Point.h Bfs.cpp Bfs.h Passenger.cpp Passenger.h Trip.cpp Trip.h Driver.cpp Driver.h Luxury.cpp Luxury.h Map.cpp Map.h Node.cpp Node.h Taxi.cpp Taxi.h TaxiCenter.cpp TaxiCenter.h TaxiFlow.cpp TaxiFlow.h)
+set(SOURCE_FILES client.cpp Socket.cpp Socket.h Udp.cpp Udp.h Grid.cpp Grid.h GridPt.cpp GridPt.h Point.cpp Point.h Bfs.cpp Bfs.h Passenger.cpp Passenger.h Trip.cpp Trip.h Driver.cpp Driver.h Luxury.cpp Luxury.h Map.cpp Map.h Node.cpp Node.h Taxi.cpp Taxi.h TaxiCenter.cpp TaxiCenter.h TaxiFlow.cpp TaxiFlow.h)
 add_executable(Ex4 ${SOURCE_FILES})
 
 
@@ -12,8 +12,8 @@ find_package(Boost 1.58.0 COMPONENTS serialization system) # or equivalent versi
 
 #add_library(Ex4 core ${core_SRCS})
 
-#add_executable(server TaxiCenter.cpp)
-add_executable(client client.cpp)
+add_executable(server TaxiFlow.cpp)
+#add_executable(client client.cpp)
 
 
 target_link_libraries(Ex4 ${Boost_LIBRARIES})

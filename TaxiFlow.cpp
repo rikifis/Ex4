@@ -1,16 +1,24 @@
 #include "TaxiFlow.h"
 
-/*int main() {
-    TaxiFlow flow = TaxiFlow();
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        return 0;
+    }
+    Socket* socket = new Udp(0, atoi(argv[1]));
+    TaxiFlow flow = TaxiFlow(socket);
     // gets the input from the user and runs the taxi center.
     flow.getInput();
     return 0;
-}*/
+}
 
-TaxiFlow::TaxiFlow() {
+TaxiFlow::TaxiFlow(Socket* socket1) {
+    socket = socket1;
+    socket->initialize();
 }
 
 TaxiFlow::~TaxiFlow() {
+    socket->closeSocket();
+    delete socket;
 }
 
 void TaxiFlow::getInput() {
@@ -70,42 +78,48 @@ void TaxiFlow::run() {
     // for '7' - end program.
     } while (command != 7);
 }
-/*
-void TaxiFlow::addDriver() {
-    int id, age, experience, cabId;
-    char statusSign;
-    // skips the punctuation marks.
-    char skip;
-    MaritalStatus status;
-    // gets the driver's details from the user.
-    cin >> id >> skip >> age >> skip >> statusSign >> skip >> experience >> skip >> cabId;
-    // assigns the right status for the driver.
-    switch (statusSign) {
-        case 'S':
-            status = SINGLE;
-            break;
-        case 'M':
-            status = MARRIED;
-            break;
-        case 'D':
-            status = DIVORCED;
-            break;
-        case 'W':
-            status = WIDOWED;
-            break;
-        default:
-            break;
+
+void TaxiFlow::addDrivers() {
+    int numDrivers;
+    // gets the number of drivers from the user.
+    cin >> numDrivers;
+    char buffer[1000];
+    for (int i = 0; i < numDrivers; i++) {
+        // get the driver.
+        socket->recieveData(buffer, sizeof(buffer));
+        Driver* driver;
+        boost::iostreams::basic_array_source<char> device(buffer, sizeof(buffer));
+        boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s(device);
+        boost::archive::binary_iarchive ia(s);
+        ia >> driver;
+
+        //sends the map to the driver.
+        std::string serial_str;
+        boost::iostreams::back_insert_device<std::string> inserter(serial_str);
+        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s1(inserter);
+        boost::archive::binary_oarchive oa1(s1);
+        Map* m = center.getMap();
+        oa1 << m;
+        // flush the stream to finish writing into the buffer
+        s1.flush();
+        socket->sendData(serial_str);
+
+        center.assignCab(driver);
+        //sends the cab to the driver.
+        std::string serial_str2;
+        boost::iostreams::back_insert_device<std::string> inserter2(serial_str2);
+        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s2(inserter2);
+        boost::archive::binary_oarchive oa2(s2);
+        Taxi* t = driver->getCab();
+        oa2 << t;
+        // flush the stream to finish writing into the buffer
+        s2.flush();
+        socket->sendData(serial_str2);
+
+        // adds the driver to the taxi center.
+        center.addDriver(driver);
     }
-    // creates the new driver.
-    Driver* driver = new Driver(id, age, status, cabId, experience);
-    // assigns the driver the centers map.
-    driver->setMap(center.getMap());
-    // assigns the driver his cab.
-    center.assignCab(driver);
-    // adds the driver to the center.
-    center.addDriver(driver);
 }
-*/
 void TaxiFlow::addTrip() {
     int id, xStart, yStart, xEnd, yEnd, numPassengers, startTime;
     double tariff;

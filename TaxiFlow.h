@@ -8,6 +8,9 @@
 #include "Driver.h"
 #include "Trip.h"
 #include "Luxury.h"
+#include <iostream>
+#include "Udp.h"
+#include <unistd.h>
 using namespace std;
 /**
  * this class creates a taxiflow that gets the input from the user.
@@ -15,6 +18,7 @@ using namespace std;
 class TaxiFlow {
     private:
         TaxiCenter center;
+        Socket* socket;
         /**
          * method that runs the program.
          */
@@ -22,7 +26,7 @@ class TaxiFlow {
         /**
         * adding drivers to the program.
         */
-        void addDrivers(){}
+        void addDrivers();
         /**
         * adding a trip to the program.
         */
@@ -43,7 +47,7 @@ class TaxiFlow {
         /**
          * constructs a TaxiFlow.
          */
-        TaxiFlow();
+        TaxiFlow(Socket* socket1);
         /**
          * destructs a TaxiFlow.
          */

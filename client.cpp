@@ -22,7 +22,7 @@
 
 using namespace std;
 using namespace boost::archive;
-int main(int argc, char *argv[]) {
+int omain(int argc, char *argv[]) {
 
     if (argc < 3) {
         return 0;
@@ -58,7 +58,6 @@ int main(int argc, char *argv[]) {
 
     // creates the new driver.
     Driver* driver = new Driver(id, age, status, cabId, experience);
-
     std::string serial_str;
     boost::iostreams::back_insert_device<std::string> inserter(serial_str);
     boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
@@ -67,27 +66,53 @@ int main(int argc, char *argv[]) {
     // flush the stream to finish writing into the buffer
     s.flush();
 
-    cout << serial_str << endl;
-    char* buf = new char[serial_str.size()];
 
-/**
- * // wrap buffer inside a stream and deserialize serial_str into obj
-boost::iostreams::basic_array_source<char> device(serial_str.data(), serial_str.size());
-boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s(device);
-boost::archive::binary_iarchive ia(s);
-ia >> obj;
- */
-    Driver* driver2;
-    boost::iostreams::basic_array_source<char> device((char*)serial_str.data(), (char*)serial_str.size());
+    // send driver information to server.
+    udp->sendData(serial_str);
+
+
+    char buffer[1000];
+
+
+
+    // get the map of the city.
+    udp->recieveData(buffer, sizeof(buffer));
+
+    Map* map;
+    boost::iostreams::basic_array_source<char> device1(buffer, sizeof(buffer));
+    boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s1(device1);
+    boost::archive::binary_iarchive ia1(s1);
+    ia1 >> map;
+
+    driver->setMap(map);
+
+    // get the taxi of the driver.
+    udp->recieveData(buffer, sizeof(buffer));
+
+    Taxi* taxi;
+    boost::iostreams::basic_array_source<char> device2(buffer, sizeof(buffer));
+    boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device2);
+    boost::archive::binary_iarchive ia2(s2);
+    ia2 >> taxi;
+
+    driver->setCab(taxi);
+
+
+
+    /*udp->reciveData(buffer, sizeof(buffer));
+
+    Trip* trip;
+    boost::iostreams::basic_array_source<char> device(buffer, sizeof(buffer));
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
     boost::archive::binary_iarchive ia(s2);
-    ia >> driver2;
+    ia >> taxi;
+
+    driver->setCab(taxi);*/
 
 
-    char buffer[1024];
-    udp->sendData("hello");
-    udp->reciveData(buffer, sizeof(buffer));
-    cout << buffer << endl;
+
+
+
     udp->closeSocket();
     delete udp;
 

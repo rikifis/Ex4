@@ -49,7 +49,7 @@ public:
 	* The Function operation: getting data from the other socket and print *
 	* the data															   *
 	***********************************************************************/
-	int reciveData(char* buffer, int size);
+	int recieveData(char* buffer, int size);
 
     void closeSocket();
     void setIp(string ip);
