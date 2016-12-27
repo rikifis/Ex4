@@ -73,7 +73,9 @@ class Driver {
          * @param experience1 drivers driving experience.
          */
         Driver(int id1, int age1, MaritalStatus status1, int cabId1, int experience1);
-        /**
+
+    Driver(){};
+    /**
          * destructs driver.
          */
         ~Driver();

@@ -55,21 +55,10 @@ int main(int argc, char *argv[]) {
             break;
     }
 
-/*    Map *gp = new Map(Point(4,4));//(1, FIAT, RED);
-
-    std::string serial_str;
-    boost::iostreams::back_insert_device<std::string> inserter(serial_str);
-    boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
-    boost::archive::binary_oarchive oa(s);
-    oa << gp;
-    s.flush();
-
-    cout << serial_str << endl;*/
-
     // creates the new driver.
     Driver* driver = new Driver(id, age, status, cabId, experience);
 
-   std::string serial_str;
+    std::string serial_str;
     boost::iostreams::back_insert_device<std::string> inserter(serial_str);
     boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
     boost::archive::binary_oarchive oa(s);
@@ -78,13 +67,11 @@ int main(int argc, char *argv[]) {
 
     cout << serial_str << endl;
 
-
-    // assigns the driver the centers map.
-   /* driver->setMap(center.getMap());
-    // assigns the driver his cab.
-    center.assignCab(driver);
-    // adds the driver to the center.
-    center.addDriver(driver);*/
+    Driver* driver2;
+    boost::iostreams::basic_array_source<char> device((char*)serial_str.c_str(), (char*)serial_str.size());
+    boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
+    boost::archive::binary_iarchive ia(s2);
+    ia >> driver2;
 
 
     char buffer[1024];
