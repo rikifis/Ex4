@@ -89,6 +89,7 @@ int omain(int argc, char *argv[]) {
     // get the taxi of the driver.
     udp->receiveData(buffer, sizeof(buffer));
 
+
     Taxi* taxi;
     boost::iostreams::basic_array_source<char> device2(buffer, sizeof(buffer));
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device2);
@@ -97,8 +98,7 @@ int omain(int argc, char *argv[]) {
     cout << "taxi " << taxi->getId() << "," << taxi->getColor() << endl;
     driver->setCab(taxi);
 
-
-
+//
     /*udp->reciveData(buffer, sizeof(buffer));
 
     Trip* trip;
