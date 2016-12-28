@@ -3,7 +3,12 @@ project(Ex4)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES client.cpp Socket.cpp Socket.h Udp.cpp Udp.h Grid.cpp Grid.h GridPt.cpp GridPt.h Point.cpp Point.h Bfs.cpp Bfs.h Passenger.cpp Passenger.h Trip.cpp Trip.h Driver.cpp Driver.h Luxury.cpp Luxury.h Map.cpp Map.h Node.cpp Node.h Taxi.cpp Taxi.h TaxiCenter.cpp TaxiCenter.h TaxiFlow.cpp TaxiFlow.h)
+set(SOURCE_FILES client.cpp Socket.cpp Socket.h Udp.cpp
+                 Udp.h Grid.cpp Grid.h GridPt.cpp GridPt.h
+                 Point.cpp Point.h Bfs.cpp Bfs.h Passenger.cpp
+                 Passenger.h Trip.cpp Trip.h Driver.cpp Driver.h
+                 Luxury.cpp Luxury.h Map.cpp Map.h Node.cpp Node.h
+                 Taxi.cpp Taxi.h TaxiCenter.cpp TaxiCenter.h TaxiFlow.cpp TaxiFlow.h)
 add_executable(Ex4 ${SOURCE_FILES})
 
 
