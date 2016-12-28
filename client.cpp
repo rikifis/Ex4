@@ -23,7 +23,7 @@
 using namespace std;
 using namespace boost::archive;
 int omain(int argc, char *argv[]) {
-
+    cout << "hello from client" << endl;
     if (argc < 3) {
         return 0;
     }
@@ -73,8 +73,7 @@ int omain(int argc, char *argv[]) {
 
     char buffer[1000];
 
-
-
+    cout << "waiting for map" << endl;
     // get the map of the city.
     udp->receiveData(buffer, sizeof(buffer));
 
@@ -83,9 +82,10 @@ int omain(int argc, char *argv[]) {
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s1(device1);
     boost::archive::binary_iarchive ia1(s1);
     ia1 >> map;
-
+    cout << "map " << map->getSize().getX() << "," << map->getSize().getY() << endl;
     driver->setMap(map);
 
+    cout << "waiting for taxi" << endl;
     // get the taxi of the driver.
     udp->receiveData(buffer, sizeof(buffer));
 
@@ -94,7 +94,7 @@ int omain(int argc, char *argv[]) {
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device2);
     boost::archive::binary_iarchive ia2(s2);
     ia2 >> taxi;
-
+    cout << "taxi " << taxi->getId() << "," << taxi->getColor() << endl;
     driver->setCab(taxi);
 
 
