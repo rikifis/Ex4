@@ -66,11 +66,8 @@ int omain(int argc, char *argv[]) {
     // flush the stream to finish writing into the buffer
     s.flush();
 
-
     // send driver information to server.
     udp->sendData(serial_str);
-
-
     char buffer[1000];
 
     cout << "waiting for map" << endl;
