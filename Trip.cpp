@@ -9,7 +9,15 @@ Trip::Trip(int id, Node* s, Node* e, int np, double t, int st) {
     tariff = t;
     startTime = st;
 }
-
+Trip::Trip() {
+    rideId = 0;
+    meters = 0;
+    start = NULL;
+    end = NULL;
+    numPassengers = 0;
+    tariff = 0;
+    startTime = 0;
+}
 Trip::~Trip() {
 }
 

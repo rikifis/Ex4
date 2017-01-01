@@ -4,6 +4,7 @@
 
 #include "Udp.h"
 #include "Driver.h"
+#include "Trip.h"
 #include <boost/iostreams/device/array.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -22,7 +23,7 @@
 
 using namespace std;
 using namespace boost::archive;
-int omain(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
     cout << "hello from client" << endl;
     if (argc < 3) {
         return 0;
@@ -74,7 +75,7 @@ int omain(int argc, char *argv[]) {
     // get the map of the city.
     udp->receiveData(buffer, sizeof(buffer));
 
-    Map2D* map;
+  /*  Map* map;
     boost::iostreams::basic_array_source<char> device1(buffer, sizeof(buffer));
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s1(device1);
     boost::archive::binary_iarchive ia1(s1);
@@ -84,7 +85,7 @@ int omain(int argc, char *argv[]) {
 
     cout << "waiting for taxi" << endl;
     // get the taxi of the driver.
-    udp->receiveData(buffer, sizeof(buffer));
+    udp->receiveData(buffer, sizeof(buffer));*/
 
 
     Taxi* taxi;
@@ -95,16 +96,16 @@ int omain(int argc, char *argv[]) {
     cout << "taxi " << taxi->getId() << "," << taxi->getColor() << endl;
     driver->setCab(taxi);
 
-//
-    /*udp->reciveData(buffer, sizeof(buffer));
+    while (udp->receiveData(buffer, sizeof(buffer)))
+    // get a trip
 
-    Trip* trip;
-    boost::iostreams::basic_array_source<char> device(buffer, sizeof(buffer));
-    boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
-    boost::archive::binary_iarchive ia(s2);
-    ia >> taxi;
 
-    driver->setCab(taxi);*/
+    Trip* tr;
+    boost::iostreams::basic_array_source<char> device3(buffer, sizeof(buffer));
+    boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s3(device3);
+    boost::archive::binary_iarchive ia3(s3);
+    ia3 >> tr;
+
 
     udp->closeSocket();
     delete udp;

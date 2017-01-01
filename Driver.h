@@ -34,7 +34,7 @@ class Driver {
         MaritalStatus status;
         double avSatisfaction;
         Taxi* cab;
-        Map2D* map;
+        Map* map;
         bool driving;
         Node* firstLocation;
         Node* location;
@@ -154,7 +154,7 @@ class Driver {
          * sets a map for a driver.
          * @param m the map.
          */
-        void setMap(Map2D* m);
+        void setMap(Map* m);
         /**
          * return drivers location
          * @return location.

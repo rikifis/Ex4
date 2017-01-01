@@ -38,10 +38,10 @@ class Taxi {
         template<class Archive>
         void serialize(Archive &ar, const unsigned int version) {
             ar & cabId;
-           // ar & km;
+            ar & km;
             ar & manufacturer;
             ar & color;
-           // ar & tariff;
+            ar & tariff;
         }
     public:
         /**

@@ -2,7 +2,20 @@
 #define EX3_TRIP_H
 #include "Point.h"
 #include "GridPt.h"
+#include <boost/serialization/vector.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/tokenizer.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/assign/list_of.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/iostreams/device/back_inserter.hpp>
+#include <boost/iostreams/stream.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
 using namespace std;
+using namespace boost::archive;
 /**
  * this class creates a trip.
  */
@@ -15,6 +28,19 @@ class Trip {
         int numPassengers;
         double tariff;
         int startTime;
+
+        friend class boost::serialization::access;
+
+        template<class Archive>
+        void serialize(Archive &ar, const unsigned int version) {
+            ar & rideId;
+            ar & meters;
+            ar & start;
+            ar & end;
+            ar & numPassengers;
+            ar & tariff;
+            ar & startTime;
+        }
     public:
         /**
          * constructs a trip.
@@ -26,6 +52,8 @@ class Trip {
          * @param stratTime the starting time of the trip.
          */
         Trip(int rideId, Node* start, Node* end, int numPassengers, double tariff, int stratTime);
+
+        Trip();
         /**
          * destructas the trip..
          */

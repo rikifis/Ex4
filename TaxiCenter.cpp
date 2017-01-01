@@ -1,6 +1,6 @@
 #include "TaxiCenter.h"
 
-TaxiCenter::TaxiCenter(Map2D* map1) {
+TaxiCenter::TaxiCenter(Map* map1) {
     map = map1;
     time = 0;
 }
@@ -78,7 +78,7 @@ void TaxiCenter::continueDriving() {
         }
     }
 }
-Map2D* TaxiCenter::getMap() {
+Map* TaxiCenter::getMap() {
     return map;
 }
 

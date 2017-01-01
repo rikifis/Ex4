@@ -79,3 +79,5 @@ ostream& operator << (ostream& os, const GridPt &pt1) {
     // will print like that: (x,y).
     return os << "(" << pt1.getPt().getX() << "," << pt1.getPt().getY() << ")";
 }
+
+BOOST_CLASS_EXPORT(GridPt);

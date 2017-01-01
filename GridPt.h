@@ -4,6 +4,8 @@
 #include <vector>
 #include "Node.h"
 #include "Point.h"
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/export.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -35,8 +37,8 @@ private:
 
     template<class Archive>
     void serialize(Archive &ar, const unsigned int version) {
-       ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Node);
-      //  ar & boost::serialization::base_object<Node>(*this);
+      // ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Node);
+        ar & boost::serialization::base_object<Node>(*this);
         ar & pt;
         ar & passed;
         ar & predecessor;

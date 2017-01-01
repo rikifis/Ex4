@@ -5,6 +5,19 @@
 #include "GridPt.h"
 #include <vector>
 #include <deque>
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/vector.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/tokenizer.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/assign/list_of.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/iostreams/device/back_inserter.hpp>
+#include <boost/iostreams/stream.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
 using namespace std;
 /*
  * Grid build a an abstract grid of nodes.
@@ -62,4 +75,5 @@ class Grid {
         */
         virtual void initialize() = 0;
 };
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(Grid);
 #endif //EX3_GRID_H

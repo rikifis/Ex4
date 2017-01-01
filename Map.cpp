@@ -1,22 +1,22 @@
 #include "Map.h"
 
-Map2D::Map2D(Point size1) {
+Map::Map(Point size1) {
     size = size1;
     obstacles = new vector<Node*>;
     // calls the function that builds the grid.
     fillGrid();
 }
-Map2D::Map2D() {
+Map::Map() {
     size = Point(10,10);
     obstacles = new vector<Node*>;
     // calls the function that builds the grid.
     fillGrid();
 }
-Map2D::~Map2D() {
+Map::~Map() {
     delete obstacles;
 }
 
-void Map2D::fillGrid() {
+void Map::fillGrid() {
     for (int i = 0; i < size.getX(); i++) {
         for ( int j = 0; j < size.getY(); j++) {
             // each place gets a point with the place value,
@@ -31,7 +31,7 @@ void Map2D::fillGrid() {
     }
 }
 
-bool Map2D::isInGrid(Point pt) {
+bool Map::isInGrid(Point pt) {
     if ((pt.getX() >= 0) && (pt.getX() <= size.getX()
         && (pt.getY() >= 0) && (pt.getY() <= size.getY()))) {
         return true;
@@ -39,7 +39,7 @@ bool Map2D::isInGrid(Point pt) {
     return false;
 }
 
-GridPt* Map2D::getPoint(Point pt) {
+GridPt* Map::getPoint(Point pt) {
     if (isInGrid(pt)) {
         return &(points[pt.getX()][pt.getY()]);
     }
@@ -48,7 +48,7 @@ GridPt* Map2D::getPoint(Point pt) {
     }
 }
 
-void Map2D::neighbors(GridPt* gp) {
+void Map::neighbors(GridPt* gp) {
     vector<GridPt*> arr;
     // sets the left neighbor if exists.
     if (isInGrid(Point(gp->getPt().getX() - 1, gp->getPt().getY()))) {
@@ -68,11 +68,11 @@ void Map2D::neighbors(GridPt* gp) {
     }
     gp->setNeighbors(&arr);
 }
-Point Map2D::getSize() {
+Point Map::getSize() {
     return size;
 }
 
-void Map2D::initialize() {
+void Map::initialize() {
     for (int i = 0; i < size.getX(); i++) {
         for (int j = 0; j < size.getY(); j++) {
             if (points[i][j].isPassed() && !(points[i][j].isObstacle())) {
@@ -83,12 +83,14 @@ void Map2D::initialize() {
         }
     }
 }
-void Map2D::addObstacle(Node* obs) {
+void Map::addObstacle(Node* obs) {
     GridPt* obstacle = getPoint(((GridPt*)obs)->getPt());
     obstacle->setObstacle();
     obstacle->setPassed();
     obstacles->push_back(obstacle);
 }
-vector<Node*>* Map2D::getObstacles() {
+vector<Node*>* Map::getObstacles() {
     return obstacles;
 }
+
+BOOST_CLASS_EXPORT(Map);

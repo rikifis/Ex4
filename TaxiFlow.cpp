@@ -1,6 +1,6 @@
 #include "TaxiFlow.h"
 
-int main(int argc, char *argv[]) {
+int Omain(int argc, char *argv[]) {
     if (argc < 2) {
         return 0;
     }
@@ -30,7 +30,7 @@ void TaxiFlow::getInput() {
     // reads the map size.
     cin >> skipws >> x >> y;
     mapSize = Point(x,y);
-    Map2D* map = new Map2D(mapSize);
+    Map* map = new Map(mapSize);
     // reads the number of obstacles.
     cin >> skipws >> numOfObs;
     // reads the obstacle.
@@ -88,7 +88,7 @@ void TaxiFlow::addDrivers() {
     char buffer[1000];
     for (int i = 0; i < numDrivers; i++) {
         cout << "waiting for driver" << endl;
-        // get the driver.
+// get the driver.
         socket->receiveData(buffer, sizeof(buffer));
         Driver* driver;
         boost::iostreams::basic_array_source<char> device(buffer, sizeof(buffer));
@@ -97,22 +97,23 @@ void TaxiFlow::addDrivers() {
         ia >> driver;
         cout << "driver " << driver->getId() << "," << driver->getAge() << "," << driver->getStatus() << endl;
         //sends the map to the driver.
-        /*3 3
-0
+        /*10 10
+1
+1,1
 3
-1,1,T,W
+2,2,F,W
 1
 1
          */
-        std::string serial_str;
+    /*    std::string serial_str;
         boost::iostreams::back_insert_device<std::string> inserter(serial_str);
         boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s1(inserter);
         boost::archive::binary_oarchive oa1(s1);
-        Map2D* map = center.getMap();
+        Map* map = center.getMap();
         oa1 << map;
         // flush the stream to finish writing into the buffer
         s1.flush();
-        socket->sendData(serial_str);
+        socket->sendData(serial_str);*/
 
 
         center.assignCab(driver);

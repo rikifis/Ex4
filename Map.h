@@ -4,6 +4,8 @@
 #include "Point.h"
 #include "Grid.h"
 #include "GridPt.h"
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/export.hpp>
 #include <boost/serialization/array.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/archive/text_oarchive.hpp>
@@ -22,7 +24,7 @@ using namespace boost::archive;
 /**
  * this class creates a map of the city for the drivers.
  */
-class Map2D { //: public Grid {
+class Map : public Grid {
     private:
         // the max grid size.
         GridPt points[10][10];
@@ -34,6 +36,7 @@ class Map2D { //: public Grid {
 
         template<class Archive>
         void serialize(Archive &ar, const unsigned int version) {
+            ar & boost::serialization::base_object<Grid>(*this);
             //ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Grid);
            // ar & points;
            /* for (int i = 0; i <= size.getX(); i++) {
@@ -54,15 +57,15 @@ class Map2D { //: public Grid {
          * constructs a map.
          * @param size1 the size of the city.
          */
-        Map2D(Point size1);
+        Map(Point size1);
         /**
          * default contructor to constructs a map.
          */
-        Map2D();
+        Map();
         /**
          * destructs a map.
          */
-        ~Map2D();
+        ~Map();
         /**
         * checks if a given point is in the grid.
         * @param pt the given point.

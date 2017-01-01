@@ -2,6 +2,7 @@
 #define EX3_NODE_H
 #include <iostream>
 #include "Point.h"
+#include <boost/serialization/base_object.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -74,4 +75,5 @@ class Node {
         virtual bool operator == (const Node &n1) const = 0;
         virtual bool operator != (const Node &n1) const = 0;
 };
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(Node);
 #endif //EX3_NODE_H
