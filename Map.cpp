@@ -1,4 +1,4 @@
-#include "Map2D.h"
+#include "Map.h"
 
 Map2D::Map2D(Point size1) {
     size = size1;
@@ -7,25 +7,25 @@ Map2D::Map2D(Point size1) {
     fillGrid();
 }
 Map2D::Map2D() {
-    /*size = Point(10,10);
+    size = Point(10,10);
     obstacles = new vector<Node*>;
     // calls the function that builds the grid.
-    fillGrid();*/
+    fillGrid();
 }
 Map2D::~Map2D() {
     delete obstacles;
 }
 
 void Map2D::fillGrid() {
-    for (int i = 0; i <= size.getX(); i++) {
-        for ( int j = 0; j <= size.getY(); j++) {
+    for (int i = 0; i < size.getX(); i++) {
+        for ( int j = 0; j < size.getY(); j++) {
             // each place gets a point with the place value,
             points[i][j] = GridPt(Point(i,j));
         }
     }
     // sets the points neighbor's..
-    for (int i = 0; i <= size.getX(); i++) {
-        for (int j = 0; j <= size.getY(); j++) {
+    for (int i = 0; i < size.getX(); i++) {
+        for (int j = 0; j < size.getY(); j++) {
             neighbors(&points[i][j]);
         }
     }
@@ -73,8 +73,8 @@ Point Map2D::getSize() {
 }
 
 void Map2D::initialize() {
-    for (int i = 0; i <= size.getX(); i++) {
-        for (int j = 0; j <= size.getY(); j++) {
+    for (int i = 0; i < size.getX(); i++) {
+        for (int j = 0; j < size.getY(); j++) {
             if (points[i][j].isPassed() && !(points[i][j].isObstacle())) {
                 points[i][j].setPassed();
                 points[i][j].setPredecessor(NULL);

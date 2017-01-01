@@ -7,7 +7,7 @@ set(SOURCE_FILES client.cpp Socket.cpp Socket.h Udp.cpp
                  Udp.h Grid.cpp Grid.h GridPt.cpp GridPt.h
                  Point.cpp Point.h Bfs.cpp Bfs.h Passenger.cpp
                  Passenger.h Trip.cpp Trip.h Driver.cpp Driver.h
-                 Luxury.cpp Luxury.h Map2D.cpp Map2D.h Node.cpp Node.h
+                 Luxury.cpp Luxury.h Map.cpp Map.h Node.cpp Node.h
                  Taxi.cpp Taxi.h TaxiCenter.cpp TaxiCenter.h TaxiFlow.cpp TaxiFlow.h)
 add_executable(TaxiFlow ${SOURCE_FILES})
 

@@ -6,7 +6,7 @@
 #include "Trip.h"
 #include "GridPt.h"
 #include "Bfs.h"
-#include "Map2D.h"
+#include "Map.h"
 #include <boost/serialization/deque.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
