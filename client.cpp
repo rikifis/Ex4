@@ -74,7 +74,7 @@ int omain(int argc, char *argv[]) {
     // get the map of the city.
     udp->receiveData(buffer, sizeof(buffer));
 
-    Map* map;
+    Map2D* map;
     boost::iostreams::basic_array_source<char> device1(buffer, sizeof(buffer));
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s1(device1);
     boost::archive::binary_iarchive ia1(s1);

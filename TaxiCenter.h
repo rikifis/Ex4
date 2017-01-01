@@ -12,13 +12,13 @@ class TaxiCenter {
         vector<Driver*> drivers;
         vector<Taxi*> taxis;
         vector<Trip*> trips;
-        Map* map;
+        Map2D* map;
         int time;
     public:
         /**
          * constructs a TaxiCenter.
          */
-        TaxiCenter(Map* map1);
+        TaxiCenter(Map2D* map1);
         /**
          * defult constructor for the TaxiCenter
          * @return
@@ -44,7 +44,7 @@ class TaxiCenter {
          * returns the taxi centers map.
          * @return the map.
          */
-        Map* getMap();
+        Map2D* getMap();
         /**
          * adds a driver to the center.
          * @param d th new driver.

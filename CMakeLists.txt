@@ -7,9 +7,9 @@ set(SOURCE_FILES client.cpp Socket.cpp Socket.h Udp.cpp
                  Udp.h Grid.cpp Grid.h GridPt.cpp GridPt.h
                  Point.cpp Point.h Bfs.cpp Bfs.h Passenger.cpp
                  Passenger.h Trip.cpp Trip.h Driver.cpp Driver.h
-                 Luxury.cpp Luxury.h Map.cpp Map.h Node.cpp Node.h
+                 Luxury.cpp Luxury.h Map2D.cpp Map2D.h Node.cpp Node.h
                  Taxi.cpp Taxi.h TaxiCenter.cpp TaxiCenter.h TaxiFlow.cpp TaxiFlow.h)
-add_executable(Ex4 ${SOURCE_FILES})
+add_executable(TaxiFlow ${SOURCE_FILES})
 
 
 set(BOOST_ROOT CACHE PATH "/usr/include/boost/") # or equivalent location
@@ -17,10 +17,10 @@ find_package(Boost 1.58.0 COMPONENTS serialization system) # or equivalent versi
 
 #add_library(Ex4 core ${core_SRCS})
 
-add_executable(server TaxiFlow.cpp)
+#add_executable(server TaxiFlow.cpp)
 #add_executable(client client.cpp)
 
 
-target_link_libraries(Ex4 ${Boost_LIBRARIES})
+target_link_libraries(TaxiFlow ${Boost_LIBRARIES})
 include_directories(${Boost_INCLUDE_DIR})
 

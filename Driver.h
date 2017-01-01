@@ -6,7 +6,7 @@
 #include "Trip.h"
 #include "GridPt.h"
 #include "Bfs.h"
-#include "Map.h"
+#include "Map2D.h"
 #include <boost/serialization/deque.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -34,7 +34,7 @@ class Driver {
         MaritalStatus status;
         double avSatisfaction;
         Taxi* cab;
-        Map* map;
+        Map2D* map;
         bool driving;
         Node* firstLocation;
         Node* location;
@@ -154,7 +154,7 @@ class Driver {
          * sets a map for a driver.
          * @param m the map.
          */
-        void setMap(Map* m);
+        void setMap(Map2D* m);
         /**
          * return drivers location
          * @return location.

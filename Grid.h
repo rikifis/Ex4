@@ -15,13 +15,12 @@ class Grid {
         * fills the grid with points.
         */
         virtual void fillGrid() = 0;
-protected:
-    friend class boost::serialization::access;
+        friend class boost::serialization::access;
 
-    template<class Archive>
-    void serialize(Archive &ar, const unsigned int version) {
+        template<class Archive>
+        void serialize(Archive &ar, const unsigned int version) {
 
-    }
+        }
     public:
         /**
          * builds the grid with a given size.

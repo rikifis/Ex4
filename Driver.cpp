@@ -61,7 +61,7 @@ void Driver::addCustomers(int c) {
 int Driver::getNumCustomers() {
     return customers;
 }
-void Driver::setMap(Map* m) {
+void Driver::setMap(Map2D* m) {
     map = m;
     location = map->getPoint(((GridPt(Point(0,0))).getPt()));
 }
