@@ -38,7 +38,7 @@ void TaxiCenter::sendTaxi() {
     GridPt *start, *end;
     int tripIndex = 0;
     // goes over the drivers, and drives them.
-    while (!(trips.empty())) {
+    while (!(trips.empty())  && (trips.size() > tripIndex)) {
         // gets the first trip.
         currTrip = trips.at(tripIndex);
         if (currTrip->getStartTime() == time) {
@@ -51,11 +51,13 @@ void TaxiCenter::sendTaxi() {
                     && !(drivers.at(j)->isDriving())) {
                     // gets the first driver.
                     currDriver = drivers.at(j);
-                    drivers.at(j)->setDriving();
+                    currDriver->setTrip(currTrip);
+                    currDriver->setNewTrip();
                     // calcs the route.
                     currDriver->calcRoute(start, end);
                     // the driver drives.
                     currDriver->drive();
+                    currDriver->setDriving();
                     // delete the trip we drove already.
                     delete trips.at(tripIndex);
                     trips.erase(trips.begin() + tripIndex);
