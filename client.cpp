@@ -71,21 +71,21 @@ int main(int argc, char *argv[]) {
     udp->sendData(serial_str);
     char buffer[1000];
 
-    cout << "waiting for map" << endl;
+ /*   cout << "waiting for map" << endl;
     // get the map of the city.
     udp->receiveData(buffer, sizeof(buffer));
 
-  /*  Map* map;
+    Map* map;
     boost::iostreams::basic_array_source<char> device1(buffer, sizeof(buffer));
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s1(device1);
     boost::archive::binary_iarchive ia1(s1);
     ia1 >> map;
     cout << "map " << map->getSize().getX() << "," << map->getSize().getY() << endl;
-    driver->setMap(map);
+    driver->setMap(map);*/
 
     cout << "waiting for taxi" << endl;
     // get the taxi of the driver.
-    udp->receiveData(buffer, sizeof(buffer));*/
+    udp->receiveData(buffer, sizeof(buffer));
 
 
     Taxi* taxi;
@@ -96,16 +96,35 @@ int main(int argc, char *argv[]) {
     cout << "taxi " << taxi->getId() << "," << taxi->getColor() << endl;
     driver->setCab(taxi);
 
-    while (udp->receiveData(buffer, sizeof(buffer)))
     // get a trip
-
-
-    Trip* tr;
-    boost::iostreams::basic_array_source<char> device3(buffer, sizeof(buffer));
-    boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s3(device3);
-    boost::archive::binary_iarchive ia3(s3);
-    ia3 >> tr;
-
+    string command;// = NULL;
+    Trip* trip;
+    Node* location;
+    do {
+        cout << "wait for string" << endl;
+        udp->receiveData(buffer, sizeof(buffer));
+        command = buffer;
+        //boost::iostreams::basic_array_source<char> device3(buffer, sizeof(buffer));
+        //boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s3(device3);
+        //boost::archive::binary_iarchive ia3(s3);
+        //ia3 >> command;
+        cout << "wait for " << command << endl;
+        if (strcmp(command.data(), "trip") == 0) {
+            udp->receiveData(buffer, sizeof(buffer));
+            boost::iostreams::basic_array_source<char> device4(buffer, sizeof(buffer));
+            boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s4(device4);
+            boost::archive::binary_iarchive ia4(s4);
+            ia4 >> trip;
+            driver->setTrip(trip);
+        } else if (strcmp(command.data(), "go") == 0) {
+            udp->receiveData(buffer, sizeof(buffer));
+            boost::iostreams::basic_array_source<char> device5(buffer, sizeof(buffer));
+            boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s5(device5);
+            boost::archive::binary_iarchive ia5(s5);
+            ia5 >> location;
+            driver->setLocation(location);
+        }
+    } while (strcmp(command.data(), "exit") != 0);
 
     udp->closeSocket();
     delete udp;
