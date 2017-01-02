@@ -1,6 +1,23 @@
 #include "TaxiFlow.h"
 
-int Omain(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
+ /*   Node* gp1 =new GridPt(Point(1,5));
+    GridPt* gp = (GridPt*)gp1;
+
+    std::string serial_str;
+    boost::iostreams::back_insert_device<std::string> inserter(serial_str);
+    boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
+    boost::archive::binary_oarchive oa(s);
+    oa << gp;
+    s.flush();
+
+    cout << serial_str << endl;*/
+
+   /* Node *gp2;
+    boost::iostreams::basic_array_source<char> device(serial_str.c_str(), serial_str.size());
+    boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device);
+    boost::archive::binary_iarchive ia(s2);
+    ia >> gp2;*/
     if (argc < 2) {
         return 0;
     }
@@ -70,6 +87,8 @@ void TaxiFlow::run() {
             case 4:
                 getDriverLocation();
                 break;
+            case 7:
+                closeClients();
             // for '9' - drives the cars.
             case 9:
                 drive();
@@ -96,6 +115,7 @@ void TaxiFlow::addDrivers() {
         boost::archive::binary_iarchive ia(s);
         ia >> driver;
         cout << "driver " << driver->getId() << "," << driver->getAge() << "," << driver->getStatus() << endl;
+        driver->setMap(center.getMap());
         //sends the map to the driver.
         /*10 10
 1
@@ -227,7 +247,47 @@ void TaxiFlow::getDriverLocation() {
 
 void TaxiFlow::drive() {
     // sends the drivers to drive.
-    center.continueDriving();
+   // center.continueDriving();
+    for (int i = 0; i < center.getDrivers().size(); i++) {
+        if (center.getDrivers().at(i)->isDriving()) {
+            socket->sendData("go");
+            center.getDrivers().at(i)->drive();
+        }
+    }
     center.sendTaxi();
+    for (int i = 0; i < center.getDrivers().size(); i++) {
+        if (center.getDrivers().at(i)->gotNewTrip()) {
+            socket->sendData("trip");
+            std::string serial_str;
+            boost::iostreams::back_insert_device<std::string> inserter(serial_str);
+            boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s(inserter);
+            boost::archive::binary_oarchive oa(s);
+            Trip* newTrip = center.getDrivers().at(i)->getTrip();
+            oa << newTrip;
+            // flush the stream to finish writing into the buffer
+            s.flush();
+            socket->sendData(serial_str);
+            // the driver drives.
+            socket->sendData("go");
+             GridPt* newLocation = (GridPt*)(center.getDrivers().at(i)->getLocation());
+
+            std::string serial_str1;
+            boost::iostreams::back_insert_device<std::string> inserter1(serial_str1);
+            boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s1(inserter1);
+            boost::archive::binary_oarchive oa1(s1);
+
+          //  GridPt* newLocation = (GridPt*)center.getDrivers().at(i)->getLocation();
+            oa1 << newLocation;
+            // flush the stream to finish writing into the buffer
+            s1.flush();
+            socket->sendData(serial_str1);
+            center.getDrivers().at(i)->setNewTrip();
+        }
+    }
+
+    //center.sendTaxi();
     center.setTime();
+}
+void TaxiFlow::closeClients() {
+    socket->sendData("exit");
 }

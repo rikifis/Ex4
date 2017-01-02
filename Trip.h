@@ -35,8 +35,8 @@ class Trip {
         void serialize(Archive &ar, const unsigned int version) {
             ar & rideId;
             ar & meters;
-            ar & start;
-            ar & end;
+            //ar & start;
+            //ar & end;
             ar & numPassengers;
             ar & tariff;
             ar & startTime;

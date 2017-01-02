@@ -36,9 +36,11 @@ class Driver {
         Taxi* cab;
         Map* map;
         bool driving;
+        bool newTrip;
         Node* firstLocation;
         Node* location;
         deque<Node*>* route;
+        Trip* trip;
 
         friend class boost::serialization::access;
 
@@ -46,22 +48,19 @@ class Driver {
         void serialize(Archive &ar, const unsigned int version) {
             ar & id;
             ar & age;
-            ar & status;
-            ar & cabId;
             ar & experience;
-
-      /*    ar & experience;
             ar & customers;
             ar & cabId;
+            ar & status;
             ar & avSatisfaction;
             ar & cab;
-            ar & map;
+         //   ar & map;
             ar & driving;
             ar & firstLocation;
             ar & location;
-            ar & route;*/
+            ar & newTrip;
+          //  ar & route;
         }
-
 
     public:
         /**
@@ -74,8 +73,8 @@ class Driver {
          */
         Driver(int id1, int age1, MaritalStatus status1, int cabId1, int experience1);
 
-    Driver(){};
-    /**
+        Driver();
+        /**
          * destructs driver.
          */
         ~Driver();
@@ -160,12 +159,21 @@ class Driver {
          * @return location.
          */
         Node* getLocation();
+
+        void setLocation(Node* loc);
+
+        void setTrip(Trip* trip);
+
+        Trip* getTrip();
         /**
          * calcs the route.
          * @param start start point
          * @param end end point
          */
         void calcRoute(Node* start, Node* end);
+
+        void setRoute(deque<Node*>* route1);
+
         /**
          * gets the route from the driver
          * @return the route to drive
@@ -184,5 +192,9 @@ class Driver {
          * sets the driving status.
          */
         void setDriving();
+
+    bool gotNewTrip();
+
+    void setNewTrip();
 };
 #endif //EX2_DRIVER_H
