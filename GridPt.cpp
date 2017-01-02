@@ -2,7 +2,7 @@
 #include "GridPt.h"
 using namespace std;
 
-GridPt::GridPt(Point pt1) {
+GridPt::GridPt(Point pt1) : Node() {
     pt = pt1;
     passed = false;
     predecessor = NULL;
@@ -10,12 +10,12 @@ GridPt::GridPt(Point pt1) {
     obstacle = false;
 }
 
-GridPt::GridPt() {
-    pt = Point(0, 0);
+GridPt::GridPt() : Node() {
+  /*  pt = Point(0, 0);
     passed = false;
     predecessor = NULL;
     nCounter = 0;
-    obstacle = false;
+    obstacle = false;*/
 }
 
 GridPt::~GridPt() {
@@ -80,4 +80,4 @@ ostream& operator << (ostream& os, const GridPt &pt1) {
     return os << "(" << pt1.getPt().getX() << "," << pt1.getPt().getY() << ")";
 }
 
-BOOST_CLASS_EXPORT(GridPt);
+//BOOST_CLASS_EXPORT(GridPt);

@@ -37,8 +37,8 @@ class Driver {
         Map* map;
         bool driving;
         bool newTrip;
-        Node* firstLocation;
-        Node* location;
+        GridPt* firstLocation;
+        GridPt* location;
         deque<Node*>* route;
         Trip* trip;
 
@@ -59,7 +59,7 @@ class Driver {
             ar & firstLocation;
             ar & location;
             ar & newTrip;
-          //  ar & route;
+         //   ar & route;
         }
 
     public:
@@ -158,9 +158,9 @@ class Driver {
          * return drivers location
          * @return location.
          */
-        Node* getLocation();
+        GridPt* getLocation();
 
-        void setLocation(Node* loc);
+        void setLocation(GridPt* loc);
 
         void setTrip(Trip* trip);
 

@@ -7,6 +7,7 @@ Taxi::Taxi(int cabId1, MANUFACTURER manufacturer1, COLOR color1) {
     manufacturer = manufacturer1;
     color = color1;
     tariff = 0;
+  //  type = 1;
 }
 Taxi::Taxi() {
 }

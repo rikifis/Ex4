@@ -1,6 +1,7 @@
 #ifndef EX3_TAXI_H
 #define EX3_TAXI_H
 #include <iostream>
+#include <boost/serialization/base_object.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/tokenizer.hpp>
@@ -32,6 +33,7 @@ class Taxi {
         MANUFACTURER manufacturer;
         COLOR color;
         double tariff;
+       // int type;
     protected:
         friend class boost::serialization::access;
 
@@ -42,6 +44,7 @@ class Taxi {
             ar & manufacturer;
             ar & color;
             ar & tariff;
+           // ar & type;
         }
     public:
         /**
@@ -100,6 +103,7 @@ class Taxi {
          * gets the type of the cab
          * @return type of cab
          */
-        int getType();
+        virtual int getType();
 };
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(Node);
 #endif //EX3_TAXI_H

@@ -44,9 +44,9 @@ void TaxiCenter::sendTaxi() {
         if (currTrip->getStartTime() == time) {
             for (int j = 0; j < drivers.size(); j++) {
                 // start point of the trip.
-                start = map->getPoint(((GridPt*) currTrip->getStart())->getPt());
+                start = map->getPoint(*(currTrip->getStart()));//(GridPt*) currTrip->getStart())->getPt());
                 // end point of the trip.
-                end = map->getPoint(((GridPt*) currTrip->getEnd())->getPt());
+                end = map->getPoint(*(currTrip->getEnd()));//(((GridPt*) currTrip->getEnd())->getPt());
                 if ((((GridPt*) drivers.at(j)->getLocation()) == start)
                     && !(drivers.at(j)->isDriving())) {
                     // gets the first driver.
@@ -59,7 +59,7 @@ void TaxiCenter::sendTaxi() {
                     currDriver->drive();
                     currDriver->setDriving();
                     // delete the trip we drove already.
-                    delete trips.at(tripIndex);
+                    //delete trips.at(tripIndex);
                     trips.erase(trips.begin() + tripIndex);
                     driverCounter++;
                     break;

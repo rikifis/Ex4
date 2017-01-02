@@ -24,9 +24,6 @@ using namespace boost::archive;
  */
 class Node {
     private:
-        bool passed;
-        Node* predecessor;
-    protected:
         friend class boost::serialization::access;
 
         template<class Archive>

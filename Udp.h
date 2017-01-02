@@ -51,7 +51,6 @@ public:
 	***********************************************************************/
 	int receiveData(char* buffer, int size);
 
-    void closeSocket();
     void setIp(string ip);
 };
 

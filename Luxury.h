@@ -11,6 +11,7 @@ class Luxury : public Taxi {
         MANUFACTURER manufacturer;
         COLOR color;
         double tariff;
+    //    int type;
 
         friend class boost::serialization::access;
 

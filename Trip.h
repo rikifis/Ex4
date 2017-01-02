@@ -23,8 +23,8 @@ class Trip {
     private:
         int rideId;
         int meters;
-        Node* start;
-        Node* end;
+        Point* start;
+        Point* end;
         int numPassengers;
         double tariff;
         int startTime;
@@ -35,8 +35,8 @@ class Trip {
         void serialize(Archive &ar, const unsigned int version) {
             ar & rideId;
             ar & meters;
-            //ar & start;
-            //ar & end;
+            ar & start;
+            ar & end;
             ar & numPassengers;
             ar & tariff;
             ar & startTime;
@@ -51,7 +51,7 @@ class Trip {
          * @param tariff the trips tariff.
          * @param stratTime the starting time of the trip.
          */
-        Trip(int rideId, Node* start, Node* end, int numPassengers, double tariff, int stratTime);
+        Trip(int rideId, Point* start, Point* end, int numPassengers, double tariff, int stratTime);
 
         Trip();
         /**
@@ -62,22 +62,22 @@ class Trip {
          * returns the starting point.
          * @return start
          */
-        Node* getStart();
+        Point* getStart();
         /**
          * sets the starting point of the trip.
          * @param s1 the new starting point.
          */
-        void setStart(Node* s1);
+        void setStart(Point* s1);
         /**
          * returns the ending point.
          * @return end.
          */
-        Node* getEnd();
+        Point* getEnd();
         /**
          * sets the ending point of the trip.
          * @param e1 the new ending point.
          */
-        void setEnd(Node* e1);
+        void setEnd(Point* e1);
         /**
          * returns the number of meters passed in trip.
          * @return meters.
@@ -112,6 +112,5 @@ class Trip {
          * @return startTime
          */
         int getStartTime();
-
 };
 #endif //EX3_TRIP_H

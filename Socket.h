@@ -81,7 +81,6 @@ class Socket {
 		***********************************************************************/
 		virtual int receiveData(char* buffer, int size) = 0;
 
-		virtual void closeSocket() = 0;
 		virtual void setIp(string ip) = 0;
 };
 

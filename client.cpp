@@ -4,6 +4,7 @@
 
 #include "Udp.h"
 #include "Driver.h"
+#include "Luxury.h"
 #include "Trip.h"
 #include <boost/iostreams/device/array.hpp>
 #include <boost/archive/text_oarchive.hpp>
@@ -20,7 +21,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <unistd.h>
-
 using namespace std;
 using namespace boost::archive;
 int main(int argc, char *argv[]) {
@@ -56,7 +56,6 @@ int main(int argc, char *argv[]) {
         default:
             break;
     }
-
     // creates the new driver.
     Driver* driver = new Driver(id, age, status, cabId, experience);
     std::string serial_str;
@@ -99,7 +98,7 @@ int main(int argc, char *argv[]) {
     // get a trip
     string command;// = NULL;
     Trip* trip;
-    Node* location;
+    GridPt* location;
     do {
         cout << "wait for string" << endl;
         udp->receiveData(buffer, sizeof(buffer));
@@ -126,7 +125,6 @@ int main(int argc, char *argv[]) {
         }
     } while (strcmp(command.data(), "exit") != 0);
 
-    udp->closeSocket();
     delete udp;
 
     return 0;

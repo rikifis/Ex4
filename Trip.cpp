@@ -1,6 +1,6 @@
 #include "Trip.h"
 
-Trip::Trip(int id, Node* s, Node* e, int np, double t, int st) {
+Trip::Trip(int id, Point* s, Point* e, int np, double t, int st) {
     rideId = id;
     meters = 0;
     start = s;
@@ -21,19 +21,19 @@ Trip::Trip() {
 Trip::~Trip() {
 }
 
-Node* Trip::getStart() {
+Point* Trip::getStart() {
     return start;
 }
 
-void Trip::setStart(Node* s1) {
+void Trip::setStart(Point* s1) {
     start = s1;
 }
 
-void Trip::setEnd(Node* e1) {
+void Trip::setEnd(Point* e1) {
     end = e1;
 }
 
-Node* Trip::getEnd() {
+Point* Trip::getEnd() {
     return end;
 }
 

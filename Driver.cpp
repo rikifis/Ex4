@@ -11,9 +11,10 @@ Driver::Driver(int id1, int age1, MaritalStatus status1, int cabId1, int experie
     customers = 0;
     driving = false;
     firstLocation = new GridPt(Point(0,0));
-    location = NULL;
+    location = new GridPt();
     route = new deque<Node*>;
     newTrip = false;
+    trip = new Trip();
 }
 Driver::Driver() {
 
@@ -21,6 +22,8 @@ Driver::Driver() {
 Driver::~Driver() {
     delete firstLocation;
     delete route;
+    delete trip;
+    //delete location;
 }
 
 int Driver::getId() {
@@ -70,13 +73,13 @@ void Driver::setMap(Map* m) {
     location = map->getPoint(((GridPt(Point(0,0))).getPt()));
 }
 
-Node* Driver::getLocation() {
+GridPt* Driver::getLocation() {
     if (location == NULL) {
         return firstLocation;
     }
     return location;
 }
-void Driver::setLocation(Node* loc) {
+void Driver::setLocation(GridPt* loc) {
     location = loc;
 }
 void Driver::setTrip(Trip* trip1) {
@@ -103,10 +106,10 @@ void Driver::drive() {
     int i = 0;
     while (i < cab->getType()) {
         if (!route->empty()) {
-            if (!isDriving()) {
+          // if (!isDriving()) {
                 // pops the starting point, where the driver is located.
-                route->pop_front();
-            }
+            //    route->pop_front();
+            //}
             location = map->getPoint(((GridPt*) (route->front()))->getPt());
             route->pop_front();
             cab->setKm(0.001);

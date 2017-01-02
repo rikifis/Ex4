@@ -107,11 +107,6 @@ int Udp::receiveData(char* buffer, int size) {
 	//return correct if there were no error
 	return bytes;
 }
-
-void Udp::closeSocket() {
-    close(socketDescriptor);
-}
-
 void Udp::setIp(string ip) {
     ip_address = ip;
 }
