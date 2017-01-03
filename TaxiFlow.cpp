@@ -93,7 +93,6 @@ void TaxiFlow::addDrivers() {
     cin >> numDrivers;
     char buffer[1000];
     for (int i = 0; i < numDrivers; i++) {
-        cout << "waiting for driver" << endl;
         // get the driver.
         socket->receiveData(buffer, sizeof(buffer));
         Driver* driver;
