@@ -11,6 +11,7 @@ BOOST_CLASS_EXPORT_GUID(Taxi, "Taxi");
 BOOST_CLASS_EXPORT_GUID(Luxury, "Luxury");
 using namespace std;
 using namespace boost::archive;
+
 int main(int argc, char *argv[]) {
     cout << "hello from client" << endl;
     if (argc < 3) {
