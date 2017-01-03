@@ -18,6 +18,7 @@
 #include <boost/iostreams/stream.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
+
 using namespace std;
 /*
  * Grid build a an abstract grid of nodes.

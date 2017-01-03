@@ -5,22 +5,6 @@
 #include "Udp.h"
 #include "Driver.h"
 #include "Luxury.h"
-#include "Trip.h"
-#include <boost/iostreams/device/array.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/tokenizer.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/assign/list_of.hpp>
-#include <boost/algorithm/string.hpp>
-#include <boost/iostreams/device/back_inserter.hpp>
-#include <boost/iostreams/stream.hpp>
-#include <boost/archive/binary_oarchive.hpp>
-#include <boost/archive/binary_iarchive.hpp>
-#include <iostream>
-#include <cstdlib>
-#include <unistd.h>
 BOOST_CLASS_EXPORT_GUID(Node, "Node");
 BOOST_CLASS_EXPORT_GUID(GridPt, "GridPt");
 BOOST_CLASS_EXPORT_GUID(Taxi, "Taxi");
@@ -33,7 +17,12 @@ int main(int argc, char *argv[]) {
         return 0;
     }
     Socket* udp = new Udp(0, atoi(argv[2]));
-    udp->setIp(argv[1]);
+    //string ip = argv[1];
+    if (strcmp(argv[1], "localhost") == 0) {
+        udp->setIp("127.0.0.1");
+    } else {
+        udp->setIp(argv[1]);
+    }
     udp->initialize();
 
     int id, age, experience, cabId;
