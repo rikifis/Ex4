@@ -3,6 +3,7 @@ BOOST_CLASS_EXPORT_GUID(Node, "Node");
 BOOST_CLASS_EXPORT_GUID(GridPt, "GridPt");
 BOOST_CLASS_EXPORT_GUID(Taxi, "Taxi");
 BOOST_CLASS_EXPORT_GUID(Luxury, "Luxury");
+
 int main(int argc, char *argv[]) {
   /*  Node* gp =new GridPt(Point(1,5));
     //GridPt* gp = (GridPt*)gp1;
