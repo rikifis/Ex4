@@ -7,7 +7,6 @@
 #include "GridPt.h"
 #include "Bfs.h"
 #include "Map.h"
-
 #include <boost/serialization/deque.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -44,8 +43,12 @@ class Driver {
         Trip* trip;
 
         friend class boost::serialization::access;
-
         template<class Archive>
+        /**
+         * seralize a driver object.
+         * @param ar
+         * @param version
+         */
         void serialize(Archive &ar, const unsigned int version) {
             ar & id;
             ar & age;
@@ -55,14 +58,11 @@ class Driver {
             ar & status;
             ar & avSatisfaction;
             ar & cab;
-         //   ar & map;
             ar & driving;
             ar & firstLocation;
             ar & location;
             ar & newTrip;
-         //   ar & route;
         }
-
     public:
         /**
          * constructs a Driver.
@@ -73,7 +73,9 @@ class Driver {
          * @param experience1 drivers driving experience.
          */
         Driver(int id1, int age1, MaritalStatus status1, int cabId1, int experience1);
-
+        /**
+         * default contructor of driver.
+         */
         Driver();
         /**
          * destructs driver.
@@ -129,7 +131,6 @@ class Driver {
          * @return the cab id
          */
         int getCabId();
-
         /**
          * sets the drivers cab info.
          * @param t the cab.
@@ -160,11 +161,20 @@ class Driver {
          * @return location.
          */
         GridPt* getLocation();
-
+        /**
+         * set the loction of driver.
+         * @param loc the location point
+         */
         void setLocation(GridPt* loc);
-
+        /**
+         * assign a trip to the driver.
+         * @param trip the trip for the driver
+         */
         void setTrip(Trip* trip);
-
+        /**
+         * get the driver trip.
+         * @return trip that assigned to driver
+         */
         Trip* getTrip();
         /**
          * calcs the route.
@@ -172,9 +182,11 @@ class Driver {
          * @param end end point
          */
         void calcRoute(Node* start, Node* end);
-
+        /**
+         * sets the route of driver.
+         * @param route1 route for driver
+         */
         void setRoute(deque<Node*>* route1);
-
         /**
          * gets the route from the driver
          * @return the route to drive
@@ -185,7 +197,7 @@ class Driver {
          */
         void drive();
         /**
-         * checks if a driver is in the midddler of driving.
+         * checks if a driver is in the midddle of driving.
          * @return true if driving, false otherwise.
          */
         bool isDriving();
@@ -193,9 +205,14 @@ class Driver {
          * sets the driving status.
          */
         void setDriving();
-
-    bool gotNewTrip();
-
-    void setNewTrip();
+        /**
+         * return if driver just got new trip or not.
+         * @return true or false
+         */
+        bool gotNewTrip();
+        /**
+         * change the bool newtrip of driver.
+         */
+        void setNewTrip();
 };
 #endif //EX2_DRIVER_H

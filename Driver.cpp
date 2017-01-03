@@ -1,7 +1,6 @@
 #include "Driver.h"
 
 Driver::Driver(int id1, int age1, MaritalStatus status1, int cabId1, int experience1) {
-
     id = id1;
     age = age1;
     status = status1;
@@ -12,10 +11,10 @@ Driver::Driver(int id1, int age1, MaritalStatus status1, int cabId1, int experie
     customers = 0;
     driving = false;
     firstLocation = new GridPt(Point(0,0));
-    location = NULL;//new GridPt();
-    route = NULL;//new deque<Node*>;
+    location = NULL;
+    route = NULL;
     newTrip = false;
-    trip = NULL;//new Trip();
+    trip = NULL;
 }
 Driver::Driver() {
 
@@ -23,11 +22,7 @@ Driver::Driver() {
 Driver::~Driver() {
     delete firstLocation;
     delete route;
-  //  delete cab;
-   // delete trip;
-    //delete location;
 }
-
 int Driver::getId() {
     return id;
 }
@@ -74,7 +69,6 @@ void Driver::setMap(Map* m) {
     map = m;
     location = map->getPoint(((GridPt(Point(0,0))).getPt()));
 }
-
 GridPt* Driver::getLocation() {
     if (location == NULL) {
         return firstLocation;
@@ -94,7 +88,6 @@ void Driver::calcRoute(Node* start, Node* end) {
     if (route != NULL) {
         delete route;
     }
-  //  route = new deque<Node*>;
     Bfs b = Bfs();
     map->initialize();
     start->setPassed();
@@ -103,7 +96,6 @@ void Driver::calcRoute(Node* start, Node* end) {
 deque<Node*>* Driver::getRoute() {
     return route;
 }
-
 void Driver::setRoute(deque<Node*>* route1) {
     route = route1;
 }
@@ -113,10 +105,6 @@ void Driver::drive() {
     // regular taxi goes one block and luxury two blocks
     while (i < cab->getType()) {
         if (!route->empty()) {
-          // if (!isDriving()) {
-                // pops the starting point, where the driver is located.
-            //    route->pop_front();
-            //}
             location = map->getPoint(((GridPt*) (route->front()))->getPt());
             route->pop_front();
             cab->setKm(0.001);
@@ -134,11 +122,9 @@ bool Driver::isDriving() {
 void Driver::setDriving() {
     driving = !driving;
 }
-
 bool Driver::gotNewTrip() {
     return newTrip;
 }
-
 void Driver::setNewTrip() {
     newTrip = !newTrip;
 }

@@ -1,4 +1,3 @@
-
 #include "GridPt.h"
 using namespace std;
 
@@ -11,11 +10,6 @@ GridPt::GridPt(Point pt1) : Node() {
 }
 
 GridPt::GridPt() : Node() {
-  /*  pt = Point(0, 0);
-    passed = false;
-    predecessor = NULL;
-    nCounter = 0;
-    obstacle = false;*/
 }
 
 GridPt::~GridPt() {
@@ -24,6 +18,7 @@ GridPt::~GridPt() {
 void GridPt::initializeCounter() {
     nCounter = 0;
 }
+
 Point GridPt::getPt() const {
     return pt;
 }
@@ -79,5 +74,3 @@ ostream& operator << (ostream& os, const GridPt &pt1) {
     // will print like that: (x,y).
     return os << "(" << pt1.getPt().getX() << "," << pt1.getPt().getY() << ")";
 }
-
-//BOOST_CLASS_EXPORT(GridPt);
