@@ -30,20 +30,15 @@ class Map : public Grid {
         GridPt points[10][10];
         Point size;
         vector<Node*>* obstacles;
-
-
         friend class boost::serialization::access;
-
         template<class Archive>
+        /**
+         * serializes a map.
+         * @param ar
+         * @param version
+         */
         void serialize(Archive &ar, const unsigned int version) {
             ar & boost::serialization::base_object<Grid>(*this);
-            //ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Grid);
-           // ar & points;
-           /* for (int i = 0; i <= size.getX(); i++) {
-                for (int j = 0; j <= size.getY(); j++) {
-                    ar & points[i][j];
-                }
-            }*/
             ar & size;
             ar & obstacles;
         }

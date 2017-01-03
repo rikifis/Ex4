@@ -23,8 +23,12 @@ class Point {
         int y;
 
     friend class boost::serialization::access;
-
     template<class Archive>
+    /**
+     * serialize Point object.
+     * @param ar
+     * @param version
+     */
     void serialize(Archive &ar, const unsigned int version) {
         ar & x;
         ar & y;

@@ -62,6 +62,7 @@ double Trip::getTariff() {
 void Trip::setTariff(double t) {
     tariff = t;
 }
+
 int Trip::getStartTime() {
     return startTime;
 }

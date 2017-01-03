@@ -30,8 +30,12 @@ class Trip {
         int startTime;
 
         friend class boost::serialization::access;
-
         template<class Archive>
+        /**
+         * serialize Trip object.
+         * @param ar
+         * @param version
+         */
         void serialize(Archive &ar, const unsigned int version) {
             ar & rideId;
             ar & meters;
@@ -52,7 +56,9 @@ class Trip {
          * @param stratTime the starting time of the trip.
          */
         Trip(int rideId, Point* start, Point* end, int numPassengers, double tariff, int stratTime);
-
+        /**
+         * default constructer.
+         */
         Trip();
         /**
          * destructas the trip..

@@ -25,7 +25,11 @@ using namespace boost::archive;
 class Node {
     private:
         friend class boost::serialization::access;
-
+        /**
+         * serializes a node.
+         * @param ar
+         * @param version
+         */
         template<class Archive>
         void serialize(Archive &ar, const unsigned int version) {
 

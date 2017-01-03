@@ -57,9 +57,8 @@ void TaxiCenter::sendTaxi() {
                     currDriver->calcRoute(start, end);
                     // the driver drives.
                     currDriver->getRoute()->pop_front();
-                   // currDriver->drive();
+                    // next time the driver will know to drive.
                     currDriver->setDriving();
-                    // delete the trip we drove already.
                     //delete trips.at(tripIndex);
                     trips.erase(trips.begin() + tripIndex);
                     driverCounter++;
@@ -76,11 +75,14 @@ void TaxiCenter::sendTaxi() {
 }
 void TaxiCenter::continueDriving() {
     for (int i = 0; i < drivers.size(); i++) {
+        // if the driver needs to drive.
         if (drivers.at(i)->isDriving()) {
+            // the driver drives one step.
             drivers.at(i)->drive();
         }
     }
 }
+
 Map* TaxiCenter::getMap() {
     return map;
 }

@@ -50,7 +50,13 @@ public:
 	* the data															   *
 	***********************************************************************/
 	int receiveData(char* buffer, int size);
-
+	/***********************************************************************
+	* function name: setIp	`											   *
+	* The Input: string of the ip										   *
+	* The output: none         											   *
+	* The Function operation: getting the ip and						   *
+	* seting it as the sockets ip										   *
+	***********************************************************************/
     void setIp(string ip);
 };
 

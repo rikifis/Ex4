@@ -42,6 +42,9 @@ class TaxiFlow {
         * method that drives the cabs to their destination.
         */
         void drive();
+        /**
+         * tells the clients they can close now.
+         */
         void closeClients();
     public:
         /**

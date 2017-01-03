@@ -33,18 +33,20 @@ class Taxi {
         MANUFACTURER manufacturer;
         COLOR color;
         double tariff;
-       // int type;
     protected:
         friend class boost::serialization::access;
-
         template<class Archive>
+        /**
+         * serialize Taxi object.
+         * @param ar
+         * @param version
+         */
         void serialize(Archive &ar, const unsigned int version) {
             ar & cabId;
             ar & km;
             ar & manufacturer;
             ar & color;
             ar & tariff;
-           // ar & type;
         }
     public:
         /**

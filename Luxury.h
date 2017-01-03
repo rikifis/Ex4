@@ -12,11 +12,13 @@ class Luxury : public Taxi {
         MANUFACTURER manufacturer;
         COLOR color;
         double tariff;
-    //    int type;
-
         friend class boost::serialization::access;
-
         template<class Archive>
+        /**
+         * serialzes a Luxury cab.
+         * @param ar
+         * @param version
+         */
         void serialize(Archive &ar, const unsigned int version) {
             ar & boost::serialization::base_object<Taxi>(*this);
            // ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Taxi);
