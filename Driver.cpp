@@ -104,6 +104,7 @@ void Driver::setRoute(deque<Node*>* route1) {
 
 void Driver::drive() {
     int i = 0;
+    // regular taxi goes one block and luxury two blocks
     while (i < cab->getType()) {
         if (!route->empty()) {
           // if (!isDriving()) {

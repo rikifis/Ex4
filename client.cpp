@@ -21,6 +21,10 @@
 #include <iostream>
 #include <cstdlib>
 #include <unistd.h>
+BOOST_CLASS_EXPORT_GUID(Node, "Node");
+BOOST_CLASS_EXPORT_GUID(GridPt, "GridPt");
+BOOST_CLASS_EXPORT_GUID(Taxi, "Taxi");
+BOOST_CLASS_EXPORT_GUID(Luxury, "Luxury");
 using namespace std;
 using namespace boost::archive;
 int main(int argc, char *argv[]) {

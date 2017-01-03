@@ -56,7 +56,8 @@ void TaxiCenter::sendTaxi() {
                     // calcs the route.
                     currDriver->calcRoute(start, end);
                     // the driver drives.
-                    currDriver->drive();
+                    currDriver->getRoute()->pop_front();
+                   // currDriver->drive();
                     currDriver->setDriving();
                     // delete the trip we drove already.
                     //delete trips.at(tripIndex);

@@ -1,6 +1,7 @@
 #ifndef EX3_LUXURY_H
 #define EX3_LUXURY_H
 #include "Taxi.h"
+#include <boost/serialization/export.hpp>
 /**
  * this class creates a Luxury cab that inherites from Taxi.
  */
@@ -30,6 +31,9 @@ class Luxury : public Taxi {
          * @param tariff1 the tariff for a drive in the cab.
          */
         Luxury(int cabId1, MANUFACTURER manufacturer1, COLOR color1);
+
+        Luxury() {}
+
         /**
          * destructs the Luxury cab.
          */
