@@ -11,10 +11,10 @@ Driver::Driver(int id1, int age1, MaritalStatus status1, int cabId1, int experie
     customers = 0;
     driving = false;
     firstLocation = new GridPt(Point(0,0));
-    location = new GridPt();
-    route = new deque<Node*>;
+    location = NULL;//new GridPt();
+    route = NULL;//new deque<Node*>;
     newTrip = false;
-    trip = new Trip();
+    trip = NULL;//new Trip();
 }
 Driver::Driver() {
 
@@ -22,7 +22,8 @@ Driver::Driver() {
 Driver::~Driver() {
     delete firstLocation;
     delete route;
-    delete trip;
+  //  delete cab;
+   // delete trip;
     //delete location;
 }
 
@@ -89,6 +90,10 @@ Trip* Driver::getTrip() {
     return trip;
 }
 void Driver::calcRoute(Node* start, Node* end) {
+    if (route != NULL) {
+        delete route;
+    }
+  //  route = new deque<Node*>;
     Bfs b = Bfs();
     map->initialize();
     start->setPassed();

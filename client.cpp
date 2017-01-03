@@ -73,24 +73,9 @@ int main(int argc, char *argv[]) {
     // send driver information to server.
     udp->sendData(serial_str);
     char buffer[1000];
-
- /*   cout << "waiting for map" << endl;
-    // get the map of the city.
-    udp->receiveData(buffer, sizeof(buffer));
-
-    Map* map;
-    boost::iostreams::basic_array_source<char> device1(buffer, sizeof(buffer));
-    boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s1(device1);
-    boost::archive::binary_iarchive ia1(s1);
-    ia1 >> map;
-    cout << "map " << map->getSize().getX() << "," << map->getSize().getY() << endl;
-    driver->setMap(map);*/
-
     cout << "waiting for taxi" << endl;
     // get the taxi of the driver.
     udp->receiveData(buffer, sizeof(buffer));
-
-
     Taxi* taxi;
     boost::iostreams::basic_array_source<char> device2(buffer, sizeof(buffer));
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s2(device2);
@@ -101,18 +86,17 @@ int main(int argc, char *argv[]) {
 
     // get a trip
     string command;// = NULL;
-    Trip* trip;
-    GridPt* location;
+    Trip* trip = new Trip();
+    GridPt* location = new GridPt();
     do {
         cout << "wait for string" << endl;
         udp->receiveData(buffer, sizeof(buffer));
         command = buffer;
-        //boost::iostreams::basic_array_source<char> device3(buffer, sizeof(buffer));
-        //boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s3(device3);
-        //boost::archive::binary_iarchive ia3(s3);
-        //ia3 >> command;
         cout << "wait for " << command << endl;
         if (strcmp(command.data(), "trip") == 0) {
+            if (trip != NULL) {
+                delete trip;
+            }
             udp->receiveData(buffer, sizeof(buffer));
             boost::iostreams::basic_array_source<char> device4(buffer, sizeof(buffer));
             boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s4(device4);
@@ -120,6 +104,9 @@ int main(int argc, char *argv[]) {
             ia4 >> trip;
             driver->setTrip(trip);
         } else if (strcmp(command.data(), "go") == 0) {
+            if (location != NULL) {
+                delete location;
+            }
             udp->receiveData(buffer, sizeof(buffer));
             boost::iostreams::basic_array_source<char> device5(buffer, sizeof(buffer));
             boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s5(device5);
@@ -128,7 +115,10 @@ int main(int argc, char *argv[]) {
             driver->setLocation(location);
         }
     } while (strcmp(command.data(), "exit") != 0);
-
+    delete trip;
+    delete driver;
+    delete location;
+    delete taxi;
     delete udp;
 
     return 0;

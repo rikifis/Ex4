@@ -3,6 +3,8 @@
 Luxury::Luxury(int cabId1, MANUFACTURER manufacturer1, COLOR color1)
         :Taxi(cabId1, manufacturer1, color1) {
 }
+Luxury::Luxury() {
+}
 Luxury::~Luxury() {
 }
 void Luxury::setTariff(double t) {

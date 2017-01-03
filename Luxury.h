@@ -32,7 +32,7 @@ class Luxury : public Taxi {
          */
         Luxury(int cabId1, MANUFACTURER manufacturer1, COLOR color1);
 
-        Luxury() {}
+        Luxury();
 
         /**
          * destructs the Luxury cab.

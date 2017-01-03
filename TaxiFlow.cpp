@@ -64,7 +64,7 @@ void TaxiFlow::getInput() {
     center = TaxiCenter(map);
     // tuns the commands.
     run();
-    //delete map; ???????????
+    delete map;
 }
 
 void TaxiFlow::run() {
@@ -110,26 +110,15 @@ void TaxiFlow::addDrivers() {
     char buffer[1000];
     for (int i = 0; i < numDrivers; i++) {
         cout << "waiting for driver" << endl;
-// get the driver.
+        // get the driver.
         socket->receiveData(buffer, sizeof(buffer));
-        Driver* driver;
+        Driver* driver;// = new Driver();
         boost::iostreams::basic_array_source<char> device(buffer, sizeof(buffer));
         boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s(device);
         boost::archive::binary_iarchive ia(s);
         ia >> driver;
         cout << "driver " << driver->getId() << "," << driver->getAge() << "," << driver->getStatus() << endl;
         driver->setMap(center.getMap());
-        //sends the map to the driver.
-    /*    std::string serial_str;
-        boost::iostreams::back_insert_device<std::string> inserter(serial_str);
-        boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> > s1(inserter);
-        boost::archive::binary_oarchive oa1(s1);
-        Map* map = center.getMap();
-        oa1 << map;
-        // flush the stream to finish writing into the buffer
-        s1.flush();
-        socket->sendData(serial_str);*/
-
 
         center.assignCab(driver);
         //sends the cab to the driver.
@@ -260,6 +249,7 @@ void TaxiFlow::drive() {
             // flush the stream to finish writing into the buffer
             s1.flush();
             socket->sendData(serial_str1);
+            delete newLocation;///////////
         }
     }
     center.sendTaxi();
@@ -275,9 +265,10 @@ void TaxiFlow::drive() {
             // flush the stream to finish writing into the buffer.
             s.flush();
             socket->sendData(serial_str);
+
             // the driver drives.
            // socket->sendData("go");
-
+            delete (center.getDrivers().at(i)->getTrip());
             center.getDrivers().at(i)->setNewTrip();
         }
     }

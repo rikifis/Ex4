@@ -19,6 +19,8 @@ Trip::Trip() {
     startTime = 0;
 }
 Trip::~Trip() {
+    delete start;
+    delete end;
 }
 
 Point* Trip::getStart() {
