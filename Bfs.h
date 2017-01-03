@@ -33,4 +33,5 @@ class Bfs {
          */
         deque<Node*>* bfs(Node *current, Node *target);
 };
+
 #endif //EX3_BFS_H
